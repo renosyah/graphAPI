@@ -12,9 +12,9 @@ import (
 
 	"github.com/gorilla/mux"
 	homedir "github.com/mitchellh/go-homedir"
+	"github.com/renosyah/graphAPI/router"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
 )
 
 var (
@@ -30,7 +30,7 @@ var rootCmd = &cobra.Command{
 
 		r := mux.NewRouter()
 
-		r.Handle("/break-even-point", http.HandlerFunc(router.BreakventPoint))
+		r.HandleFunc("/break-even-point", router.BreakventPoint)
 
 		port := viper.GetInt("app.port")
 		p := os.Getenv("PORT")
@@ -84,7 +84,7 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is github.com/renosyah/graphAPI/.server.toml)")
-	cobra.OnInitialize(initConfig, initRequestPost)
+	cobra.OnInitialize(initConfig)
 }
 
 func initConfig() {
