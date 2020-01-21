@@ -90,7 +90,7 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 
 	numY := 0
 	for i := maxPoint; i > pad; i -= mult {
-		if hideTag == "false" {
+		if hideTag == "false" || i == maxPoint {
 			text.FillStringAt(fmt.Sprintf("%d - ", numY), 0, float64(i))
 		}
 		if inBetween(yPoint, numY-ystep, numY) {
@@ -134,7 +134,7 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 
 	numX := 0
 	for i := pad; i < maxPoint; i += mult {
-		if hideTag == "false" {
+		if hideTag == "false" || i == pad {
 			text.FillStringAt("| ", float64(i), float64(maxPoint+20))
 			text.FillStringAt(fmt.Sprintf("%d", numX), float64(i), float64(maxPoint+20*2))
 		}
