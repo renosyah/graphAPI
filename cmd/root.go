@@ -24,12 +24,13 @@ var (
 var rootCmd = &cobra.Command{
 	Use: "app",
 	PreRun: func(cmd *cobra.Command, args []string) {
-		router.Init()
+		router.Init(viper.GetString("app.host"))
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 
 		r := mux.NewRouter()
 
+		r.HandleFunc("/", router.Index)
 		r.HandleFunc("/break-even-point", router.BreakventPoint)
 
 		port := viper.GetInt("app.port")

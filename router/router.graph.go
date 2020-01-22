@@ -74,7 +74,7 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 	// straight line from bottom to right
 	gc.MoveTo(float64(pad), float64(maxPoint))
 	gc.LineTo(float64(maxPoint), float64(maxPoint))
-	text.FillStringAt(xTag, float64(maxPoint), float64(maxPoint))
+	text.FillStringAt(xTag, float64(maxPoint)+5, float64(maxPoint))
 
 	lineY := float64(pad)
 	line2Y := float64(pad)

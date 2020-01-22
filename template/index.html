@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>Simple Graph</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submit').click(function() {
+                var x = $('#x').val();
+                var y = $('#y').val();
+                var max = $('#max').val();
+                var xstep = $('#xstep').val();
+                var ystep = $('#ystep').val();
+                var fc = $('#fc').val();
+                var hide = 'false';
+                if ($('#hide').is(":checked")) {
+                    hide = true;
+                }
+
+                $('#graph').attr('src', function(index, src) {
+                    console.log('' + index + ' ' + src);
+                    return '/break-even-point?x=' + x + '&y=' + y + '&max=' + max + '&xstep=' + xstep + '&ystep=' + ystep + '&fc=' + fc + '&hide=' + hide;
+                });
+            });
+            $('#reset').click(function() {
+                $('#graph').attr('src', function(index, src) {
+                    return '/break-even-point?x=1&y=1&max=10&xstep=1&ystep=1&fc=1&hide=false';
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <table border="0">
+        <tr>
+            <td style="width:50%;padding:20px">
+                <table style="text-align: left;">
+                    <tr>
+                        <td>
+                            <h2>Break Even Point</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Input X Value : <input type="number" id="x" holder="input x" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Input Y Value : <input type="number" id="y" holder="input y" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Input FC Value : <input type="number" id="fc" holder="input fc" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Simplified : <input type="checkbox" id="hide" value="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Input N Value : <input type="number" id="max" holder="input max" value="10" /></td>
+                    </tr>
+                    <tr>
+                        <td>X step : <input type="number" id="xstep" holder="input max" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Y step : <input type="number" id="ystep" holder="input max" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" id="submit">Submit</button>
+                            <button type="button" id="reset">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+            <td style="text-align:center;padding:20px">
+                <img id="graph" width="500" height="500" src="/break-even-point?x=1&y=1&max=10&xstep=1&ystep=1&fc=1&hide=false" />
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

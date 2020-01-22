@@ -1,7 +1,7 @@
 [app]
 name = "graph-api"
 version = "0.0.1"
-host = "localhost"
+host = "https://graphapiandika.herokuapp.com"
 port = 8000
 read_timeout = 5
 write_timeout = 10
