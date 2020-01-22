@@ -69,16 +69,12 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 	// straigh line from top to bottom
 	gc.MoveTo(float64(pad), float64(pad))
 	gc.LineTo(float64(pad), float64(maxPoint))
-	if hideTag == "false" {
-		text.FillStringAt(yTag, 10, 10)
-	}
+	text.FillStringAt(yTag, float64(pad)-5, float64(pad)-5)
 
 	// straight line from bottom to right
 	gc.MoveTo(float64(pad), float64(maxPoint))
 	gc.LineTo(float64(maxPoint), float64(maxPoint))
-	if hideTag == "false" {
-		text.FillStringAt(xTag, float64(maxPoint), float64(maxPoint))
-	}
+	text.FillStringAt(xTag, float64(maxPoint), float64(maxPoint))
 
 	lineY := float64(pad)
 	line2Y := float64(pad)
@@ -98,6 +94,7 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 			if hideTag == "true" {
 				text.FillStringAt(fmt.Sprintf("%d-", yPoint), 0, float64(i))
 			}
+
 		}
 
 		if inBetween(yPoint*2, numY-ystep, numY) {
@@ -107,7 +104,8 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 		//-------------------- testing -------------------
 
 		if inBetween(numFC, numY-ystep, numY) {
-			lineFC = float64(i)
+			lineFC = float64(i) - 5
+
 			if numFC <= numY {
 				lineFC += 5
 			} else if numFC > numY-ystep {
@@ -138,16 +136,27 @@ func BreakventPoint(w http.ResponseWriter, r *http.Request) {
 			text.FillStringAt("| ", float64(i), float64(maxPoint+20))
 			text.FillStringAt(fmt.Sprintf("%d", numX), float64(i), float64(maxPoint+20*2))
 		}
-		if xPoint == numX {
+		if inBetween(xPoint, numX-xstep, numX) {
 			lineX = float64(i) + 5
+			if numX <= numX {
+				lineX -= 5
+			} else if numX > numX-xstep {
+				lineX += 5
+			}
 			if hideTag == "true" {
 				text.FillStringAt("| ", float64(i), float64(maxPoint+20))
 				text.FillStringAt(fmt.Sprintf("%d", xPoint), float64(i), float64(maxPoint+20*2))
 			}
+
 		}
 
-		if xPoint*2 == numX {
+		if inBetween(xPoint*2, numX-xstep, numX) {
 			line2X = float64(i) + 5
+			if numX <= numX {
+				line2X -= 5
+			} else if numX > numX-xstep {
+				line2X += 5
+			}
 		}
 
 		if xPoint*2 >= numX {
